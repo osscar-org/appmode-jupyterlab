@@ -1,0 +1,9 @@
+@import "variables.css";
+
+.jp-AppmodeIcon {
+  background-image: var(--jp-icon-appmode);
+}
+
+.jp-AppmodePreview-renderOnSave {
+  align-items: center;
+}
