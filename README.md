@@ -14,7 +14,7 @@ https://github.com/voila-dashboards/voila
 ## Install
 
 ```bash
-jupyter labextension install appmode-jupyterlab
+jupyter labextension install @osscar/appmode-jupyterlab
 ```
 
 ## Contributing
@@ -58,3 +58,9 @@ Now every change will be built locally and bundled into JupyterLab. Be sure to r
 
 jupyter labextension uninstall appmode-jupyterlab
 ```
+# Acknowlegements
+
+We acknowledge support from:
+* EPFL Open Science Fund
+
+<img src='./OSSCAR-logo.png' width='300'>
