@@ -56,7 +56,7 @@ Now every change will be built locally and bundled into JupyterLab. Be sure to r
 
 ```bash
 
-jupyter labextension uninstall appmode-jupyterlab
+jupyter labextension uninstall @osscar/appmode-jupyterlab
 ```
 ## Acknowlegements
 
