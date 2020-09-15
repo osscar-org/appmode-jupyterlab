@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip  
-        python -m pip install jupyterlab=2.2.8
+        python -m pip install jupyterlab==2.2.8
     - name: Build the extension
       run: |
         jlpm
