@@ -1,5 +1,5 @@
 {
-  "name": "appmode-jupyterlab",
+  "name": "@osscar/appmode-jupyterlab",
   "version": "1.0.0",
   "description": "A JupyterLab extension for Appmode.",
   "keywords": [
@@ -22,11 +22,11 @@
   "style": "style/index.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osscar-org/appmode-jupyterlab.git"
+    "url": "git+https://github.com/osscar-org/appmode-jupyterlab.git"
   },
-  "scripts": { 
+  "scripts": {
     "build": "tsc",
-    "clean": "rimraf lib tsconfig.tsbuildinfo", 
+    "clean": "rimraf lib tsconfig.tsbuildinfo",
     "eslint": "eslint . --ext .ts,.tsx --fix",
     "eslint:check": "eslint . --ext .ts,.tsx",
     "prepare": "jlpm run clean && jlpm run build",
@@ -49,7 +49,7 @@
     "@typescript-eslint/parser": "^2.25.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2", 
+    "eslint-plugin-prettier": "^3.1.2",
     "prettier": "2.1.1",
     "rimraf": "^2.6.1",
     "typescript": "~3.7.0"
@@ -57,7 +57,10 @@
   "sideEffects": [
     "style/*.css"
   ],
-  "jupyterlab": { 
+  "jupyterlab": {
     "extension": true
+  },
+  "directories": {
+    "lib": "lib"
   }
 }
