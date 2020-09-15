@@ -1,51 +1,51 @@
 import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin,
-  ILayoutRestorer
-} from "@jupyterlab/application";
+  ILayoutRestorer,
+} from '@jupyterlab/application';
 
 import {
   ICommandPalette,
   WidgetTracker,
-  ToolbarButton
-} from "@jupyterlab/apputils";
+  ToolbarButton,
+} from '@jupyterlab/apputils';
 
-import { ISettingRegistry } from "@jupyterlab/settingregistry";
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
-import { PageConfig } from "@jupyterlab/coreutils";
+import { PageConfig } from '@jupyterlab/coreutils';
 
-import { DocumentRegistry } from "@jupyterlab/docregistry";
+import { DocumentRegistry } from '@jupyterlab/docregistry';
 
-import { IMainMenu } from "@jupyterlab/mainmenu";
+import { IMainMenu } from '@jupyterlab/mainmenu';
 
 import {
   INotebookTracker,
   NotebookPanel,
-  INotebookModel
-} from "@jupyterlab/notebook";
+  INotebookModel,
+} from '@jupyterlab/notebook';
 
-import { CommandRegistry } from "@lumino/commands";
+import { CommandRegistry } from '@lumino/commands';
 
-import { ReadonlyJSONObject } from "@lumino/coreutils";
+import { ReadonlyJSONObject } from '@lumino/coreutils';
 
-import { IDisposable } from "@lumino/disposable";
+import { IDisposable } from '@lumino/disposable';
 
 import {
   APPMODE_ICON_CLASS,
   AppmodePreview,
   IAppmodePreviewTracker,
-  AppmodePreviewFactory
-} from "./preview";
+  AppmodePreviewFactory,
+} from './preview';
 
-import "../style/index.css";
+import '../style/index.css';
 
 /**
  * The command IDs used by the plugin.
  */
 export namespace CommandIDs {
-  export const appmodeRender = "notebook:render-with-appmode";
+  export const appmodeRender = 'notebook:render-with-appmode';
 
-  export const appmodeOpen = "notebook:open-with-appmode";
+  export const appmodeOpen = 'notebook:open-with-appmode';
 }
 
 /**
@@ -66,14 +66,14 @@ class AppmodeRenderButton
    */
   createNew(panel: NotebookPanel): IDisposable {
     const button = new ToolbarButton({
-      className: "appmodeOpen",
-      tooltip: "Render with Appmode",
+      className: 'appmodeOpen',
+      tooltip: 'Render with Appmode',
       iconClass: APPMODE_ICON_CLASS,
       onClick: () => {
         this._commands.execute(CommandIDs.appmodeOpen);
-      }
+      },
     });
-    panel.toolbar.insertAfter("cellType", "appmodeRender", button);
+    panel.toolbar.insertAfter('cellType', 'appmodeRender', button);
     return button;
   }
 
@@ -84,7 +84,7 @@ class AppmodeRenderButton
  * Initialization data for the jupyterlab-appmode extension.
  */
 const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
-  id: "@jupyter-appmode/jupyterlab-preview:plugin",
+  id: '@jupyter-appmode/jupyterlab-preview:plugin',
   autoStart: true,
   requires: [INotebookTracker],
   optional: [ICommandPalette, ILayoutRestorer, IMainMenu, ISettingRegistry],
@@ -99,24 +99,24 @@ const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
   ) => {
     // Create a widget tracker for Voilà Previews.
     const tracker = new WidgetTracker<AppmodePreview>({
-      namespace: "appmode-preview"
+      namespace: 'appmode-preview',
     });
 
     if (restorer) {
       restorer.restore(tracker, {
-        command: "docmanager:open",
-        args: panel => ({
+        command: 'docmanager:open',
+        args: (panel) => ({
           path: panel.context.path,
-          factory: factory.name
+          factory: factory.name,
         }),
-        name: panel => panel.context.path,
-        when: app.serviceManager.ready
+        name: (panel) => panel.context.path,
+        when: app.serviceManager.ready,
       });
     }
 
     function getCurrent(args: ReadonlyJSONObject): NotebookPanel | null {
       const widget = notebooks.currentWidget;
-      const activate = args["activate"] !== false;
+      const activate = args['activate'] !== false;
 
       if (activate && widget) {
         app.shell.activateById(widget.id);
@@ -138,9 +138,9 @@ const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
     }
 
     const factory = new AppmodePreviewFactory(getAppmodeUrl, {
-      name: "Appmode-preview",
-      fileTypes: ["notebook"],
-      modelName: "notebook"
+      name: 'Appmode-preview',
+      fileTypes: ['notebook'],
+      modelName: 'notebook',
     });
 
     factory.widgetCreated.connect((sender, widget) => {
@@ -153,7 +153,7 @@ const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
     });
 
     const updateSettings = (settings: ISettingRegistry.ISettings): void => {
-      factory.defaultRenderOnSave = settings.get("renderOnSave")
+      factory.defaultRenderOnSave = settings.get('renderOnSave')
         .composite as boolean;
     };
 
@@ -173,29 +173,29 @@ const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
     const { commands, docRegistry } = app;
 
     commands.addCommand(CommandIDs.appmodeRender, {
-      label: "Render Notebook with Appmode",
-      execute: async args => {
+      label: 'Render Notebook with Appmode',
+      execute: async (args) => {
         const current = getCurrent(args);
         let context: DocumentRegistry.IContext<INotebookModel>;
         if (current) {
           context = current.context;
           await context.save();
 
-          commands.execute("docmanager:open", {
+          commands.execute('docmanager:open', {
             path: context.path,
-            factory: "Appmode-preview",
+            factory: 'Appmode-preview',
             options: {
-              mode: "split-right"
-            }
+              mode: 'split-right',
+            },
           });
         }
       },
-      isEnabled
+      isEnabled,
     });
 
     commands.addCommand(CommandIDs.appmodeOpen, {
-      label: "Open with Appmode in New Browser Tab",
-      execute: async args => {
+      label: 'Open with Appmode in New Browser Tab',
+      execute: async (args) => {
         const current = getCurrent(args);
         if (!current) {
           return;
@@ -204,12 +204,12 @@ const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
         const appmodeUrl = getAppmodeUrl(current.context.path);
         window.open(appmodeUrl);
       },
-      isEnabled
+      isEnabled,
     });
 
     if (palette) {
-      const category = "Notebook Operations";
-      [CommandIDs.appmodeRender, CommandIDs.appmodeOpen].forEach(command => {
+      const category = 'Notebook Operations';
+      [CommandIDs.appmodeRender, CommandIDs.appmodeOpen].forEach((command) => {
         palette.addItem({ command, category });
       });
     }
@@ -218,21 +218,21 @@ const extension: JupyterFrontEndPlugin<IAppmodePreviewTracker> = {
       menu.viewMenu.addGroup(
         [
           {
-            command: CommandIDs.appmodeRender
+            command: CommandIDs.appmodeRender,
           },
           {
-            command: CommandIDs.appmodeOpen
-          }
+            command: CommandIDs.appmodeOpen,
+          },
         ],
         1000
       );
     }
 
     const appmodeButton = new AppmodeRenderButton(commands);
-    docRegistry.addWidgetExtension("Notebook", appmodeButton);
+    docRegistry.addWidgetExtension('Notebook', appmodeButton);
 
     return tracker;
-  }
+  },
 };
 
 export default extension;
