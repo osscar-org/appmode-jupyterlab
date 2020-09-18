@@ -2,8 +2,9 @@
 
 ![Github Actions Status](https://github.com/osscar-org/appmode-jupyterlab/workflows/Build/badge.svg)
 
-A JupyterLab extension for Appmode. This extension is created from the modification of the voila JupyterLab extension code.
-https://github.com/voila-dashboards/voila
+A JupyterLab extension for Appmode (https://github.com/oschuett/appmode). 
+This extension is created from the modification of the voila JupyterLab extension code
+(https://github.com/voila-dashboards/voila).
 
 
 
