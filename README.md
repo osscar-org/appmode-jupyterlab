@@ -59,9 +59,8 @@ Now every change will be built locally and bundled into JupyterLab. Be sure to r
 
 jupyter labextension uninstall @osscar/appmode-jupyterlab
 ```
-## Acknowlegements
+# Acknowledgements
 
-We acknowledge support from:
-* EPFL Open Science Fund
+We acknowledge support from the EPFL Open Science Fund via the [OSSCAR](http://www.osscar.org) project.
 
-<img src='http://www.osscar.org/wp-content/uploads/2019/03/OSSCAR-logo.png' width='240'>
+<img src='http://www.osscar.org/wp-content/uploads/2019/03/OSSCAR-logo.png' width='230'>
